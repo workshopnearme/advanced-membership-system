@@ -4,8 +4,8 @@
  * Plugin URI: https://yoursite.com
  * Description: Complete membership registration system with custom fields, auto ID generation, verification, and WooCommerce integration
  * Version: 1.0.0
- * Author: Your Name
- * Author URI: https://yoursite.com
+ * Author: Shukry Radzi
+ * Author URI: 
  * Text Domain: ams
  * Domain Path: /languages
  * Requires at least: 5.8

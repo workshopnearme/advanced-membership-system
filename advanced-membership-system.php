@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Advanced Membership System
- * Plugin URI: https://yoursite.com
+ * Plugin URI: https://cloudswired.com.my
  * Description: Complete membership registration system with custom fields, auto ID generation, verification, and WooCommerce integration
  * Version: 1.0.0
  * Author: Shukry Radzi
- * Author URI: 
+ * Author URI: https://cloudswired.com.my
  * Text Domain: ams
  * Domain Path: /languages
  * Requires at least: 5.8

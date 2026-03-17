@@ -60,6 +60,9 @@
                     alert(response.data || 'Error adding field');
                     $btn.prop('disabled', false).text('Add Field');
                 }
+            }).fail(function() {
+                alert('Server error. Please try again.');
+                $btn.prop('disabled', false).text('Add Field');
             });
         });
         

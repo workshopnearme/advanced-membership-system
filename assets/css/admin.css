@@ -1,0 +1,158 @@
+/* Advanced Membership System - Admin Styles */
+
+.ams-fields-manager {
+    max-width: 1200px;
+}
+
+.ams-add-field-form {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ccd0d4;
+    margin: 20px 0;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+
+.ams-add-field-form h2 {
+    margin-top: 0;
+}
+
+#ams-fields-table input[type="text"],
+#ams-fields-table select {
+    width: 100%;
+}
+
+.ui-state-highlight {
+    height: 50px;
+    background: #ffffcc;
+    border: 1px dashed #ccc;
+}
+
+.handle {
+    color: #999;
+    font-size: 18px;
+    cursor: move;
+    text-align: center;
+}
+
+.handle:hover {
+    color: #333;
+}
+
+#ams-save-status {
+    display: inline-block;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.ams-product-tips {
+    margin-top: 30px;
+    background: #fff;
+    padding: 20px;
+    border-left: 4px solid #0073aa;
+}
+
+.ams-product-tips h3 {
+    margin-top: 0;
+}
+
+.ams-product-tips ul {
+    list-style: disc;
+    margin-left: 20px;
+}
+
+.ams-product-tips li {
+    margin-bottom: 8px;
+}
+
+.status-publish {
+    color: #46b450;
+    font-weight: bold;
+}
+
+.status-draft {
+    color: #f56e28;
+    font-weight: bold;
+}
+
+.status-pending {
+    color: #0073aa;
+    font-weight: bold;
+}
+
+.nav-tab-wrapper {
+    margin-bottom: 20px;
+}
+
+.tab-content {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ccd0d4;
+    border-top: none;
+}
+
+.form-table th {
+    width: 200px;
+}
+
+.ams-membership-id-display {
+    background: #f0f0f1;
+    padding: 15px;
+    border-left: 4px solid #0073aa;
+    margin-bottom: 20px;
+}
+
+.ams-membership-id-display h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.membership-id-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0073aa;
+    margin: 0;
+}
+
+.ams-order-meta {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+}
+
+.ams-order-meta h3 {
+    margin-top: 0;
+}
+
+.ams-order-meta p {
+    margin: 5px 0;
+}
+
+.membership-status-active {
+    color: #46b450;
+    font-weight: bold;
+}
+
+.membership-status-expired {
+    color: #dc3232;
+    font-weight: bold;
+}
+
+.membership-status-cancelled {
+    color: #999;
+    font-weight: bold;
+}
+
+.membership-status-pending {
+    color: #f56e28;
+    font-weight: bold;
+}
+
+.delete-field {
+    color: #b32d2e;
+}
+
+.delete-field:hover {
+    color: #dc3232;
+    border-color: #dc3232;
+}

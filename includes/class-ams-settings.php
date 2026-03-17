@@ -17,6 +17,7 @@ class AMS_Settings {
     public function __construct() {
         add_action('admin_init', array($this, 'register_settings'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_scripts'));
+        add_action('wp_ajax_ams_reset_counter', array($this, 'ajax_reset_counter'));
     }
     
     public function add_menu() {
@@ -90,11 +91,6 @@ class AMS_Settings {
     }
     
     public function settings_page() {
-        if (isset($_POST['ams_reset_counter']) && check_admin_referer('ams_reset_counter')) {
-            $new_start = intval($_POST['reset_to_number']);
-            update_option('ams_last_id', $new_start);
-            echo '<div class="notice notice-success"><p>' . __('Membership counter has been reset!', 'ams') . '</p></div>';
-        }
         
         ?>
         <div class="wrap">
@@ -200,12 +196,10 @@ class AMS_Settings {
                                 <label for="reset_to_number"><?php _e('Reset To', 'ams'); ?></label>
                             </th>
                             <td>
-                                <form method="post" style="display: inline;">
-                                    <?php wp_nonce_field('ams_reset_counter'); ?>
-                                    <input type="number" name="reset_to_number" id="reset_to_number" value="<?php echo esc_attr(get_option('ams_membership_start_number', 100)); ?>" class="small-text">
-                                    <input type="submit" name="ams_reset_counter" class="button button-secondary" value="<?php _e('Reset Counter', 'ams'); ?>" onclick="return confirm('<?php _e('Are you sure? This will affect the next membership ID generated.', 'ams'); ?>');">
-                                    <p class="description"><?php _e('Use this for testing or to set a specific starting number.', 'ams'); ?></p>
-                                </form>
+                                <input type="number" name="reset_to_number" id="reset_to_number" value="<?php echo esc_attr(get_option('ams_membership_start_number', 100)); ?>" class="small-text">
+                                <button type="button" id="ams-reset-counter-btn" class="button button-secondary"><?php _e('Reset Counter', 'ams'); ?></button>
+                                <span id="ams-reset-status"></span>
+                                <p class="description"><?php _e('Use this for testing or to set a specific starting number.', 'ams'); ?></p>
                             </td>
                         </tr>
                     </table>
@@ -320,11 +314,43 @@ class AMS_Settings {
                 $('.tab-content').hide();
                 $($(this).attr('href')).show();
             });
+
+            $('#ams-reset-counter-btn').on('click', function() {
+                if (!confirm('<?php _e('Are you sure? This will affect the next membership ID generated.', 'ams'); ?>')) {
+                    return;
+                }
+                var newNumber = $('#reset_to_number').val();
+                $.post(ajaxurl, {
+                    action: 'ams_reset_counter',
+                    nonce: amsAdmin.nonce,
+                    reset_to_number: newNumber
+                }, function(response) {
+                    if (response.success) {
+                        $('#ams-reset-status').html('<span style="color:green;">✓ ' + response.data + '</span>');
+                        setTimeout(function() { $('#ams-reset-status').fadeOut(function(){ $(this).html('').show(); }); }, 3000);
+                    } else {
+                        $('#ams-reset-status').html('<span style="color:red;">✗ ' + response.data + '</span>');
+                    }
+                });
+            });
         });
         </script>
         <?php
     }
     
+    public function ajax_reset_counter() {
+        check_ajax_referer('ams_admin_nonce', 'nonce');
+
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(__('Unauthorized', 'ams'));
+        }
+
+        $new_start = intval($_POST['reset_to_number']);
+        update_option('ams_last_id', $new_start);
+
+        wp_send_json_success(__('Membership counter has been reset!', 'ams'));
+    }
+
     public function fields_page() {
         require_once AMS_PLUGIN_DIR . 'includes/admin/fields-page.php';
     }
